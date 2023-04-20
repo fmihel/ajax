@@ -1,0 +1,24 @@
+{
+    "name": "fmihel/ajax",
+    "description": "ajax responser of apache/php server",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "fmihel",
+            "email": "fmihel76@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "fmihel\\": "server"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "fmihel\\test\\": "tests"
+        }
+    },
+    "require": {
+    }
+}
