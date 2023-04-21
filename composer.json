@@ -10,7 +10,7 @@
         }
     ],
     "archive": {
-        "exclude": ["/client", "/.npmignore","/package.json","/package-lock.json","/rollup.config.js","/rollup.config.min.js"]
+        "exclude": ["/client", ".npmignore","package.json","package-lock.json","rollup.config.js","rollup.config.min.js"]
     },    
     "autoload": {
         "psr-4": {
