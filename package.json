@@ -5,13 +5,14 @@
   "main": "dist/fmihel-ajax.min.js",
   "types":"client/types.d.ts",
   "scripts": {
-    "build": "npm run build-dist && npm run build-dist-min",
-    "build-dist": "rollup -c rollup.config.js",
-    "build-dist-min": "rollup -c rollup.config.min.js",
     "npm-publish-patch": "npm run build && npm version patch && npm publish",
     "npm-publish-minor": "npm run build && npm version minor && npm publish",
     "npm-publish-major": "npm run build && npm version major && npm publish",
-    "npm-publish-beta":  "npm run build && npm publish  --tag beta"    
+    "npm-publish-beta":  "npm run build && npm publish  --tag beta",
+    "git-push-origin-main":"git push origin main && git push origin --tags",
+    "build": "npm run build-dist && npm run build-dist-min",
+    "build-dist": "rollup -c rollup.config.js",
+    "build-dist-min": "rollup -c rollup.config.min.js"
   },
   "repository": {
     "type": "git",
