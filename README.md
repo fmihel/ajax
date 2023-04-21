@@ -4,7 +4,12 @@
 
 ```bash
 $ npm i fmihel-ajax
-$ composer require fmihel/ajax && ./vendor/fmihel/composer-after-install.sh
+$ composer require fmihel/ajax 
+```
+run script for remove js scripts from vendor path
+```bash
+$ cd ./vendor/fmihel/ajax && ./composer-after-install.sh
+
 ```
 
 ## Simple use

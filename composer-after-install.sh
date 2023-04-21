@@ -1,4 +1,3 @@
-cd ./vendor/fmihel/ajax
 rm -rf client
 rm -rf index.js
 rm -rf package.json
