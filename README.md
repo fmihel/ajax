@@ -4,7 +4,7 @@
 
 ```bash
 $ npm i fmihel-ajax
-$ composer require fmihel/ajax
+$ composer require fmihel/ajax && ./vendor/fmihel/composer-after-install.sh
 ```
 
 ## Simple use
