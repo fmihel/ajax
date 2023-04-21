@@ -39,7 +39,7 @@ ajax::send({
 ```php
 <?php
     use fmihel\ajax;
-    error_log(print_r(ajax::$data['msg']));
+    error_log(print_r(ajax::$data,true));
     ajax::out('hi, from server');
 ?>
 ```
@@ -54,7 +54,7 @@ require_once __DIR__.'/vendor/autoload.php';
 
 use fmihel\ajax;
 
-if (ajax::enable()){
+if (ajax::enabled()){
     ajax::init();
     require_once ajax::module();
     ajax::done();
