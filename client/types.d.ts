@@ -10,4 +10,7 @@ export default class Ajax{
 
     /** send request to server */
     send({to:string, data:any}):object;
+    
+    /** add plugin */
+    addPlugin(plugin:object){
 }
