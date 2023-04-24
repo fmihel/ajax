@@ -8,7 +8,7 @@ $ composer require fmihel/ajax
 ```
 run script for remove js scripts from vendor path
 ```bash
-$ cd ./vendor/fmihel/ajax && ./composer-after-install.sh
+$ cd ./vendor/fmihel/ajax && ./composer-after-install.sh && cd ../../../
 
 ```
 

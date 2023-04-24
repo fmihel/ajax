@@ -14,29 +14,13 @@
     },    
     "autoload": {
         "psr-4": {
-            "fmihel\\": "server",
-            "MyVendor\\":""
+            "fmihel\\": "server"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "fmihel\\test\\": "tests"
         }
-    },
-    "scripts": {
-        "post-update-cmd": "MyVendor\\MyClass::postUpdate",
-        "post-package-install": [
-            "MyVendor\\MyClass::postPackageInstall"
-        ],
-        "post-install-cmd": [
-            "MyVendor\\MyClass::warmCache"
-        ],
-        "post-autoload-dump": [
-            "MyVendor\\MyClass::postAutoloadDump"
-        ],
-        "post-create-project-cmd": [
-            "echo hello"
-        ]
     },
     "require": {
     }
