@@ -14,19 +14,13 @@
     },    
     "autoload": {
         "psr-4": {
-            "fmihel\\": "server",
-            "MyVendor\\": "MyVendor"
+            "fmihel\\": "server"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "fmihel\\test\\": "tests"
         }
-    },
-    "scripts":{
-        "post-install-cmd":[
-            "MyVendor\\MyClass::warmCache"
-        ]
     },
     "require": {
     }
