@@ -14,8 +14,7 @@
     },    
     "autoload": {
         "psr-4": {
-            "fmihel\\": "server",
-            "MyVendor\\":""
+            "fmihel\\": "server"
         }
     },
     "autoload-dev": {
@@ -25,7 +24,7 @@
     },
     "scripts":{
         "post-package-install": [
-            "MyVendor\\MyClass::warmCache"
+            "echo hello"
         ]
     },
     "require": {
