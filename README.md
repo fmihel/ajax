@@ -6,7 +6,7 @@
 $ npm i fmihel-ajax
 $ composer require fmihel/ajax 
 ```
-run script for remove js scripts from vendor path
+run script for remove js files from vendor path 
 ```bash
 $ cd ./vendor/fmihel/ajax && ./composer-after-install.sh && cd ../../../
 
