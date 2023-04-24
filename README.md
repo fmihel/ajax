@@ -40,7 +40,7 @@ ajax::send({
 
 ```
 
-```mod.php``` in folder ```< path of index.php  >/path1/path2```
+```mod.php``` in folder ```<path-of-index.php>/path1/path2```
 ```php
 <?php
     use fmihel\ajax;
