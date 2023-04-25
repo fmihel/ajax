@@ -41,7 +41,7 @@
             ]
         },
         "mushroom-clear":[
-            "client", ".npmignore","package.json","package-lock.json","rollup.config.js","rollup.config.min.js"
+            "client", ".npmignore","package.json","package-lock.json","rollup.config.js","rollup.config.min.js","index.js",".gitignore"
         ]
             
         
