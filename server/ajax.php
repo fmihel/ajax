@@ -1,6 +1,6 @@
 <?php
 
-namespace fmihel;
+namespace fmihel\Ajax;
 
 require_once __DIR__ . '/iAjaxPlugin.php';
 require_once __DIR__ . '/AjaxPlugin.php';

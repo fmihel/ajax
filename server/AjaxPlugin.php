@@ -1,5 +1,5 @@
 <?php
-namespace fmihel;
+namespace fmihel\Ajax;
 
 class AjaxPlugin implements iAjaxPlugin
 {
