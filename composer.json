@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "fmihel\\Ajax": "server/"
+            "fmihel\\Ajax\\": "server/"
         }
     },
     "require": {
