@@ -1,4 +1,4 @@
-# ajax
+# ajax v1.0
 
 ## Install 
 
@@ -43,7 +43,7 @@ ajax::send({
 ```mod.php``` in folder ```<path-of-index.php>/path1/path2```
 ```php
 <?php
-    use fmihel\ajax;
+    use fmihel\ajax\ajax;
     error_log(print_r(ajax::$data,true));
     ajax::out('hi, from server');
 ?>
@@ -57,7 +57,7 @@ ajax::send({
 
 require_once __DIR__.'/vendor/autoload.php';
 
-use fmihel\ajax;
+use fmihel\ajax\ajax;
 
 if (ajax::enabled()){
     ajax::init();

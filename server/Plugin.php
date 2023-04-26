@@ -1,13 +1,13 @@
 <?php
-namespace fmihel\Ajax;
+namespace fmihel\ajax;
 
-class AjaxPlugin implements iAjaxPlugin
+class Plugin implements iPlugin
 {
-    public $router;
+    public $ajax;
 
-    public function setRouter($router)
+    public function setAjax($ajax)
     {
-        $this->router = $router;
+        $this->ajax = $ajax;
     }
 
     // должен возвращат $pack

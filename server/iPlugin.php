@@ -1,11 +1,10 @@
 <?php
 
-namespace fmihel\Ajax;
+namespace fmihel\ajax;
 
-interface iAjaxPlugin
+interface iPlugin
 {
-
-    public function setRouter($router);
+    public function setAjax($ajax);
     // должен возвращат $pack
     public function before($pack);
     // должен возвращат $pack

@@ -1,6 +1,6 @@
 <?php
 
-namespace fmihel\Ajax;
+namespace fmihel\ajax;
 
 class MushroomHooks
 {

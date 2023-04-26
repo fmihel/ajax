@@ -1,9 +1,9 @@
 <?php
 
-namespace fmihel\Ajax;
+namespace fmihel\ajax;
 
-require_once __DIR__ . '/iAjaxPlugin.php';
-require_once __DIR__ . '/AjaxPlugin.php';
+//require_once __DIR__ . '/iPlugin.php';
+//require_once __DIR__ . '/Plugin.php';
 
 /* ----------------------------------------------
 Example for use:
@@ -234,7 +234,7 @@ class ajax
 
     public static function addPlugin($plugin)
     {
-        $plugin->setRouter('fmihel\ajax');
+        $plugin->setAjax('fmihel\Ajax\ajax');
         self::$plugins[] = $plugin;
     }
 
