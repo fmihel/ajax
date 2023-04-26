@@ -32,7 +32,6 @@ class MushroomHooks
 
     public static function afterInstall($params)
     {
-        error_log('afteInstall from ajax...');
         try {
             $json = file_get_contents(__DIR__ . self::UP_TO_PACKAGE . 'composer.json');
             $composer = json_decode($json, true);
