@@ -30,7 +30,7 @@ export default class Ajax {
         };
         this.plugins = [];
 
-        this.reponseText = '';
+        this.responseText = '';
         this.codeError = 0; 
   
     }
