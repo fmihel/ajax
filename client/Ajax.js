@@ -29,6 +29,10 @@ export default class Ajax {
             after: [],
         };
         this.plugins = [];
+
+        this.reponseText = '';
+        this.codeError = 0; 
+  
     }
 
     /** регистрируем события  */
@@ -56,6 +60,10 @@ export default class Ajax {
 
     send({ to, data = {}, params = {} }) {
         const self = this;
+
+        self.responseText = '';
+        self.codeError = 0;
+
         const update = { ...self.global, ...params };
         const { host, id, ...prms } = update;
         let pack = { data, to };
@@ -70,25 +78,39 @@ export default class Ajax {
                 body: JSON.stringify({ [id]: pack }),
             },
         )
-            .then((response) => response.json())
+            .then((response) => {
+                return response.text();
+            })
+            .then(text=>{
+                self.responseText = text;
+                try{
+                    return JSON.parse(text);
+                }catch(e){
+                    self.codeError = 300;
+                    throw new Error(self.codeErrorToStr(self.codeError));
+                }
+            })
             .then((recvPack) => {
                 let recv = { ...recvPack, to };
                 recv  = self.doPlugins('after',recv);
                 recv = self.do('after', recv);
-
+  
                 if (!('res' in recv)) {
-                    throw new Error('неизвестный ответ');
+                  self.codeError = 301;
+                  throw new Error(self.codeErrorToStr(self.codeError));
                 }
-
+  
                 if (recv.res == 1) {
                     if (!('data' in recv)) {
-                        throw new Error('отсутствует data');
+                        self.codeError = 302;
+                        throw new Error(self.codeErrorToStr(self.codeError));
                     }
                     return recv.data;
                 }
-
+  
                 if (!('msg' in recv)) {
-                    throw new Error('ошибка без описания');
+                    self.codeError = 303;
+                    throw new Error(self.codeErrorToStr(self.codeError));
                 }
                 throw new Error(recv.msg);
             });
@@ -112,4 +134,27 @@ export default class Ajax {
 
         return pack;
     }
+    
+    codeErrorToStr(code){
+
+        if (code == 0){
+          return 'нет ошибок';
+        }
+    
+        if (code == 300){
+          return 'ошибка парсинга данных сервера';
+        }
+        if (code == 301){
+          return 'не найдено свойство res в структуре ответа';
+        }
+        if (code == 302){
+          return 'не найдено свойство data в структуре ответа';
+        }
+        if (code == 303){
+          return 'не найдено свойство msg в структуре ответа';
+        }
+    
+        return `неизвестный код ошибки ${code}`;
+    
+      }    
 }
