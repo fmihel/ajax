@@ -1,6 +1,6 @@
 {
   "name": "fmihel-ajax",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "ajax exchanger with apache/php server",
   "main": "dist/fmihel-ajax.min.js",
   "types": "client/types.d.ts",
