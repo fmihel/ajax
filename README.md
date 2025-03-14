@@ -1,4 +1,4 @@
-# ajax v1.0
+# ajax v1.2
 
 ## Install 
 

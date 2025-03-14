@@ -1,5 +1,4 @@
 <?php
-
 namespace fmihel\ajax;
 
 //require_once __DIR__ . '/iPlugin.php';
@@ -28,14 +27,14 @@ class ajax
 {
 
     private static $enable = null;
-    private static $id = 'router';
+    private static $id     = 'router';
 
     private static $pack = null;
-    public static $data = [];
-    public static $path = '';
+    public static $data  = [];
+    public static $path  = '';
 
     private static $events = ['after' => [], 'before' => []];
-    private static $root = '';
+    private static $root   = '';
 
     private static $rules = []; // [ 'from/path'=>'to/path',callback($root,$path):string || undef  ]
 
@@ -47,10 +46,10 @@ class ajax
         if (self::_tryLoad()) {
 
             $params = array_merge([
-                'root' => pathinfo($_SERVER['SCRIPT_FILENAME'])['dirname'],
-                'before' => false,
-                'after' => false,
-                'rules' => [],
+                'root'    => pathinfo($_SERVER['SCRIPT_FILENAME'])['dirname'],
+                'before'  => false,
+                'after'   => false,
+                'rules'   => [],
                 'plugins' => [],
             ], $params);
 
@@ -61,7 +60,7 @@ class ajax
 
             foreach ($params['plugins'] as $plugin) {
                 self::addPlugin($plugin);
-            };
+            }
 
             if ($params['after']) {
                 self::on('after', $params['after']);
@@ -74,7 +73,7 @@ class ajax
             self::$rules = array_merge(self::$rules, $params['rules']);
 
             return true;
-        };
+        }
 
         return false;
     }
@@ -82,6 +81,17 @@ class ajax
     public static function done($data = [])
     {
         self::out($data);
+    }
+
+    public static function data($name, $default = null)
+    {`1
+        if (! isset(self::$data[$name])) {
+            if ($default === null) {
+                throw new \Exception("var $name is not defined");
+            }
+            return $default;
+        }
+        return self::$data[$name];
     }
 
     /** возвращает имя модуля к которому идет обращение от клиента */
@@ -92,7 +102,7 @@ class ajax
 
         $module_name = self::calcModuleName(self::$rules, self::$root, self::$path);
 
-        if (!file_exists($module_name)) {
+        if (! file_exists($module_name)) {
             self::error('module not exist ' . $module_name);
         }
 
@@ -110,8 +120,8 @@ class ajax
     public static function out($data)
     {
         self::$pack['data'] = $data;
-        self::$pack = self::doEvent('after', self::$pack);
-        self::$pack = self::doPlugins('after', self::$pack);
+        self::$pack         = self::doEvent('after', self::$pack);
+        self::$pack         = self::doPlugins('after', self::$pack);
         echo json_encode(array_merge(['res' => 1], self::$pack));
         exit;
     }
@@ -126,7 +136,7 @@ class ajax
 
     public static function on($ev, $callback)
     {
-        if (!array_key_exists($ev, self::$events)) {
+        if (! array_key_exists($ev, self::$events)) {
             throw new \Exception("event " . $ev . ' is not event of router ');
         }
 
@@ -136,13 +146,13 @@ class ajax
 
     private static function doEvent($ev, $pack)
     {
-        if (!array_key_exists($ev, self::$events)) {
+        if (! array_key_exists($ev, self::$events)) {
             throw new \Exception("event " . $ev . ' is not event of router ');
         }
 
         foreach (self::$events[$ev] as $callback) {
             $pack = $callback($pack);
-        };
+        }
         return $pack;
     }
     private static function _tryLoad()
@@ -152,9 +162,9 @@ class ajax
             $input = json_decode(trim(file_get_contents("php://input")), true);
             if ($input && isset($input[self::$id])) {
                 self::$enable = true;
-                self::$pack = $input[self::$id];
-            };
-        };
+                self::$pack   = $input[self::$id];
+            }
+        }
 
         return self::$enable;
     }
@@ -174,18 +184,18 @@ class ajax
                     if ($path === $from) {
                         $find = $to;
                         break;
-                    };
-                };
+                    }
+                }
 
             } elseif ($type === 'string' || $type === 'object') {
                 $find = $rule($root, $path);
-            };
+            }
 
             if ($find) {
                 break;
             }
 
-        };
+        }
 
         return self::addPhpExt($find ? $find : self::join($root, $path));
     }
@@ -200,19 +210,19 @@ class ajax
 
         foreach ($paths as $key => $path) {
             $paths[$key] = str_replace('/', '\\', $path);
-        };
+        }
 
-        $root = ':\\';
+        $root    = ':\\';
         $rootKey = '<%ROOT%>';
-        $out = str_replace($root, $rootKey, join('/', $paths));
+        $out     = str_replace($root, $rootKey, join('/', $paths));
 
         $out = explode('/', $out);
-        $out = array_filter($out, function ($value) {return !is_null($value) && $value !== '';});
+        $out = array_filter($out, function ($value) {return ! is_null($value) && $value !== '';});
 
         $other = [];
         foreach ($out as $a) {
-            $a = explode('\\', $a);
-            $other = array_merge($other, array_filter($a, function ($value) {return !is_null($value) && $value !== '';}));
+            $a     = explode('\\', $a);
+            $other = array_merge($other, array_filter($a, function ($value) {return ! is_null($value) && $value !== '';}));
         }
         $out = $other;
 
@@ -228,7 +238,7 @@ class ajax
     private static function addPhpExt($path)
     {
         $path = trim($path);
-        $pos = strrpos(strtolower($path), '.php');
+        $pos  = strrpos(strtolower($path), '.php');
         return ($pos === strlen($path) - 4) ? $path : $path . '.php';
     }
 
@@ -245,11 +255,11 @@ class ajax
         foreach ($plugins as $plugin) {
             if ($ev === 'before') {
                 $pack = $plugin->before($pack);
-            };
+            }
 
             if ($ev === 'after') {
                 $pack = $plugin->after($pack);
-            };
+            }
         }
         return $pack;
     }
