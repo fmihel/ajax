@@ -84,7 +84,7 @@ class ajax
     }
 
     public static function data($name, $default = null)
-    {`1
+    {
         if (! isset(self::$data[$name])) {
             if ($default === null) {
                 throw new \Exception("var $name is not defined");
