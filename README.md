@@ -1,4 +1,4 @@
-# ajax v1.2
+# ajax v2
 
 ## Install 
 
@@ -44,7 +44,7 @@ ajax::send({
 ```php
 <?php
     use fmihel\ajax\ajax;
-    error_log(print_r(ajax::$data,true));
+    error_log(print_r(ajax::data(),true));
     ajax::out('hi, from server');
 ?>
 ```

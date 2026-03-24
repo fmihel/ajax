@@ -25,13 +25,14 @@ router::error($e);
  */
 class ajax
 {
+    const Exception = '-exception-';
 
     private static $enable = null;
     private static $id     = 'router';
 
     private static $pack = null;
-    public static $data  = [];
-    public static $path  = '';
+    // public static $data  = [];
+    public static $path = '';
 
     private static $events = ['after' => [], 'before' => []];
     private static $root   = '';
@@ -53,7 +54,7 @@ class ajax
                 'plugins' => [],
             ], $params);
 
-            self::$data = self::$pack['data'];
+            // self::$data = self::$pack['data'];
             self::$path = self::$pack['to'];
 
             self::$root = $params['root'];
@@ -83,15 +84,19 @@ class ajax
         self::out($data);
     }
 
-    public static function data($name, $default = null)
+    public static function data(string $name = '', $default = self::Exception)
     {
-        if (! isset(self::$data[$name])) {
-            if ($default === null) {
-                throw new \Exception("var $name is not defined");
+        $data = self::$pack['data'];
+        if (! empty($name)) {
+            if (! isset($data[$name])) {
+                if ($default === self::Exception) {
+                    throw new \Exception("var $name is not defined");
+                }
+                return $default;
             }
-            return $default;
+            return $data[$name];
         }
-        return self::$data[$name];
+        return $data;
     }
 
     /** возвращает имя модуля к которому идет обращение от клиента */
@@ -119,9 +124,11 @@ class ajax
 
     public static function out($data)
     {
+
         self::$pack['data'] = $data;
         self::$pack         = self::doEvent('after', self::$pack);
         self::$pack         = self::doPlugins('after', self::$pack);
+
         echo json_encode(array_merge(['res' => 1], self::$pack));
         exit;
     }
