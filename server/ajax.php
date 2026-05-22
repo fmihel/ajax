@@ -102,7 +102,7 @@ class ajax
     /** возвращает имя модуля к которому идет обращение от клиента */
     public static function module()
     {
-        self::$pack = self::doPlugins('before', self::$pack);
+        self::doPlugins('before');
         self::$pack = self::doEvent('before', self::$pack);
 
         $module_name = self::calcModuleName(self::$rules, self::$root, self::$path);
@@ -127,7 +127,7 @@ class ajax
 
         self::$pack['data'] = $data;
         self::$pack         = self::doEvent('after', self::$pack);
-        self::$pack         = self::doPlugins('after', self::$pack);
+        self::doPlugins('after');
 
         echo json_encode(array_merge(['res' => 1], self::$pack));
         exit;
@@ -255,19 +255,19 @@ class ajax
         self::$plugins[] = $plugin;
     }
 
-    private static function doPlugins($ev, $pack)
+    private static function doPlugins($ev)
     {
         $plugins = ($ev === 'after' ? array_reverse(self::$plugins) : self::$plugins);
 
         foreach ($plugins as $plugin) {
             if ($ev === 'before') {
-                $pack = $plugin->before($pack);
+                self::$pack = $plugin->before(self::$pack);
             }
 
             if ($ev === 'after') {
-                $pack = $plugin->after($pack);
+                self::$pack = $plugin->after(self::$pack);
             }
         }
-        return $pack;
+
     }
 }
